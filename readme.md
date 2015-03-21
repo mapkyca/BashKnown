@@ -15,9 +15,8 @@ Requirements
 * python
 * openssl
 * base64
-* sha256sum
 
-The last two should be part of your distro's core utils package.
+The last should be part of your distro's core utils package.
 
 Licence
 -------
