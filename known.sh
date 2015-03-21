@@ -13,7 +13,7 @@
 ACTION=$(echo -n $1 |cut -d'/' -f4-)
 HMAC=$(echo -n "/$ACTION" | openssl dgst -binary -sha256 -hmac $3 |  base64 -w0)
 
-curl -i -H "Accept: application/json" -X POST \
+curl -c /tmp/known.sh-cookies -L -H "Accept: application/json" \
 	-H "X-KNOWN-USERNAME: $2" \
 	-H "X-KNOWN-SIGNATURE: $HMAC" \
-	-d $4 $1
+	--data-urlencode "$4" $1
