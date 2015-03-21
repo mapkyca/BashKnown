@@ -11,7 +11,7 @@
 #####
 
 ACTION=$(echo -n $1 |cut -d'/' -f4-)
-HMAC=$(echo -n "${ACTION}$3" | sha256sum | cut -d' ' -f1 | base64 -w0)
+HMAC=$(echo -n "/$ACTION" | openssl dgst -binary -sha256 -hmac $3 |  base64 -w0)
 
 curl -i -H "Accept: application/json" -X POST \
 	-H "X-KNOWN-USERNAME: $2" \
