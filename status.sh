@@ -21,4 +21,4 @@ for word in $syndication;
 	do syn="${syn}syndication[]=$word&";
 done
 
-echo "${syn}body=$data" | ./known.sh "$1/status/edit" $2 $3
+echo "${syn}body=$data" | known.sh "$1/status/edit" $2 $3
