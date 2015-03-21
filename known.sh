@@ -6,14 +6,16 @@
 # This is basically a wrapper around curl for posting things to the Known API from the shell
 #
 # Usage:
-# 	./known http://mysite.com/endpoint user api_key data
+# 	echo "body=my data" | ./known http://mysite.com/endpoint user api_key
 #
 #####
 
 ACTION=$(echo -n $1 |cut -d'/' -f4-)
 HMAC=$(echo -n "/$ACTION" | openssl dgst -binary -sha256 -hmac $3 |  base64 -w0)
 
+read data
+
 curl -sS -c /tmp/known.sh-cookies -L -H "Accept: application/json" \
 	-H "X-KNOWN-USERNAME: $2" \
 	-H "X-KNOWN-SIGNATURE: $HMAC" \
-	-d "$4" $1 | python -m json.tool
+	-d "$data" $1 | python -m json.tool
