@@ -18,6 +18,13 @@ Requirements
 
 The last should be part of your distro's core utils package.
 
+Example
+-------
+
+Send a status message, and send it to twitter.
+
+echo "my tweet" | ./status.sh https://mysite.com me myaccesscode twitter
+
 Licence
 -------
 
