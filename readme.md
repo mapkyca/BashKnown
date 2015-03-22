@@ -23,7 +23,7 @@ Example
 
 Send a status message, and send it to twitter.
 
-echo "my tweet" | ./status.sh https://mysite.com me myaccesscode twitter
+echo "my tweet" | ./status.sh https://mysite.com me myaccesscode twitter::username
 
 Licence
 -------
