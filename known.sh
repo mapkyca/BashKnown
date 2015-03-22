@@ -17,7 +17,6 @@ read data
 
 # Temp cookie file
 TFILE="/tmp/$(basename $0).$$.tmp"
-echo $TFILE
 
 curl -sS -c $TFILE -L -H "Accept: application/json" \
 	-H "X-KNOWN-USERNAME: $2" \
