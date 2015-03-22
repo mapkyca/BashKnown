@@ -24,7 +24,9 @@ syndication="${@:4}"
 syn=""
 
 for word in $syndication;
-	do syn="${syn}syndication[]=$word&";
+	do
+	enc=$(echo -n $word | php -r  "echo urlencode(file_get_contents('php://stdin'));");
+	syn="${syn}syndication%5B%5D=$enc&";
 done
 
-echo "${syn}title=$title&body=$data" | ./known.sh "$1/entry/edit" $2 $3
+echo "${syn}title=$title&body=$data" | known.sh "$1/entry/edit" $2 $3
