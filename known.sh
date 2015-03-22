@@ -15,7 +15,13 @@ HMAC=$(echo -n "/$ACTION" | openssl dgst -binary -sha256 -hmac $3 |  base64 -w0)
 
 read data
 
-curl -sS -c /tmp/known.sh-cookies -L -H "Accept: application/json" \
+# Temp cookie file
+TFILE="/tmp/$(basename $0).$$.tmp"
+echo $TFILE
+
+curl -sS -c $TFILE -L -H "Accept: application/json" \
 	-H "X-KNOWN-USERNAME: $2" \
 	-H "X-KNOWN-SIGNATURE: $HMAC" \
 	-d "$data" $1 | python -m json.tool
+
+rm $TFILE
