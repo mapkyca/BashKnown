@@ -12,13 +12,13 @@
 #####
 
 read title
-title=$(echo -n $title | php -r "echo urlencode(file_get_contents('php://stdin'));")
+title=$(echo -n "$title" | php -r "echo urlencode(file_get_contents('php://stdin'));")
 
 data=''
 while read line;
 	do data="${data}$line<br />";
 done
-data=$(echo -n $data | php -r "echo urlencode(file_get_contents('php://stdin'));")
+data=$(echo -n "$data" | php -r "echo urlencode(file_get_contents('php://stdin'));")
 
 syndication="${@:4}"
 syn=""
