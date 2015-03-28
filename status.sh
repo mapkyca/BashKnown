@@ -12,7 +12,7 @@
 
 read post
 
-data=$(echo -n $post | php -r "echo urlencode(file_get_contents('php://stdin'));")
+data=$(echo -n "$post" | php -r "echo urlencode(file_get_contents('php://stdin'));")
 
 syndication="${@:4}"
 syn=""
