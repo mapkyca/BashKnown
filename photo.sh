@@ -14,8 +14,6 @@
 
 read post
 
-data=$(echo -n "$post" | php -r "echo urlencode(file_get_contents('php://stdin'));")
-
 syndication="${@:6}"
 syn=""
 
@@ -43,7 +41,7 @@ curl -sS -c $COOKIE -L \
 	-H "Content-Type: multipart/form-data"  \
         -F "photo=@${5};filename=alert.jpg;type=image/jpeg" \
         -F "title=${4}" \
-	-F "body=${data}" \
+	-F "body=${post}" \
 	$1/photo/edit | python -m json.tool
 
 rm $COOKIE
