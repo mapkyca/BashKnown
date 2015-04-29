@@ -44,7 +44,7 @@ curl -sS -c $COOKIE -L \
         -F "photo=@${5};filename=alert.jpg;type=image/jpeg" \
         -F "title=${4}" \
 	-F "body=${data}" \
-	$1/photo/edit #| python -m json.tool
+	$1/photo/edit | python -m json.tool
 
 rm $COOKIE
 
