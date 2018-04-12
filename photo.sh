@@ -34,12 +34,15 @@ NEWDATA="${syn}title=${4}&body=${data}"
 # Temp cookie file
 COOKIE="/tmp/$(basename $0).$$.tmp"
 
+NAME=$(basename $5)
+TYPE=$(file -b --mime-type $5)
+
 curl -sS -c $COOKIE -L \
 	-H "Accept: application/json" \
         -H "X-KNOWN-USERNAME: $2" \
         -H "X-KNOWN-SIGNATURE: $HMAC" \
 	-H "Content-Type: multipart/form-data"  \
-        -F "photo=@${5};filename=alert.jpg;type=image/jpeg" \
+        -F "photo[]=@${5};filename=$NAME;type=$TYPE" \
         -F "title=${4}" \
 	-F "body=${post}" \
 	$1/photo/edit | python -m json.tool
