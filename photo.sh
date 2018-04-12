@@ -41,14 +41,27 @@ COOKIE="/tmp/$(basename $0).$$.tmp"
 
 NAME=$(basename $5)
 TYPE=$(file -b --mime-type $5)
+F=" -F ""photo[]=@${5};filename=$NAME;type=$TYPE"" "
+
+if [ $# -gt 5 ]; then
+j=1
+for i in "$@"; do
+        if [ $j -gt 5 ]; then
+	        NAME=${i##*/}
+        	TYPE=$(file -b --mime-type $i)
+        	F="$F -F ""photo[]=@${i};filename=$NAME;type=$TYPE"" "
+        fi
+        let j=j+1
+done
+fi
 
 curl -sS -c $COOKIE -L \
 	-H "Accept: application/json" \
         -H "X-KNOWN-USERNAME: $2" \
         -H "X-KNOWN-SIGNATURE: $HMAC" \
 	-H "Content-Type: multipart/form-data"  \
-        -F "photo[]=@${5};filename=$NAME;type=$TYPE" \
         -F "title=${4}" \
+	$F \
 	-F "body=${post}" \
 	$1/photo/edit | python -m json.tool
 
