@@ -14,6 +14,11 @@
 
 read post
 
+if [ $# -lt 5 ]; then
+	echo "Usage: echo \"body message\" | $0 https://mysite.com user api_key title filename"
+	exit
+fi
+
 syndication="${@:6}"
 syn=""
 
