@@ -43,9 +43,12 @@ NAME=$(basename $5)
 TYPE=$(file -b --mime-type $5)
 F=" -F ""photo[]=@${5};filename=$NAME;type=$TYPE"" "
 
+# If there are more than 5 arguments
 if [ $# -gt 5 ]; then
 j=1
+# Loop through all arguments
 for i in "$@"; do
+	# Restrict ourselves to those after the first image
         if [ $j -gt 5 ]; then
 	        NAME=${i##*/}
         	TYPE=$(file -b --mime-type $i)
