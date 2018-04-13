@@ -12,6 +12,11 @@
 
 read post
 
+if [ $# -lt 3 ]; then
+	echo "Usage: echo \"my status message\" | $0 https://mysite.com user api_key [syndication]"
+	exit
+fi
+
 data=$(echo -n "$post" | php -r "echo urlencode(file_get_contents('php://stdin'));")
 
 syndication="${@:4}"
